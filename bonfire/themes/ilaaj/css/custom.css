@@ -1,0 +1,10 @@
+.margin
+{
+	width: 225px;
+	height: 152px;
+}
+
+.item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img 
+{
+	height: 152px;
+}

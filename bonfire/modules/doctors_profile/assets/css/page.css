@@ -1,0 +1,64 @@
+*{
+	padding: 0;
+	list-style-type: none;
+}
+
+#example{
+	height: 300px;
+}
+
+
+#gallery{
+	margin: 5px 0;
+	background: #f6f6f6;
+}
+
+.downloadButton{
+	box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+	border:1px solid #08536a;
+	display: block;
+	border-radius: 2px;
+	padding: 10px;background: #0da4d3; /* Old browsers */
+	background: #0c89b0; /* Old browsers */
+
+
+}
+.downloadButton:hover{
+	opacity: 0.7;
+}
+.downloadButton strong{
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0px -1px 0px rgba(000,000,000,0.2), 0px 1px 0px rgba(255,255,255,1);
+}
+.downloadButton small{
+	font-size: 10px;
+	color:#fff;
+}
+/*****************
+* Browser Support Table
+*****************/
+.browserSupport{
+	width: 100%;
+	margin: 6px 0 10px;
+}
+.browserSupport td{
+	margin: 2px;
+	padding: 2px;
+	background: #f6f6f6;
+	text-align: center;
+	font-weight: bold;
+}
+.browserSupport td.full{
+	background: #adf0b5;
+}
+.browserSupport td.partial{
+	background: #f0efad;
+}
+.browserSupport td.none{
+	background: #f0adad;
+}
+/*****************
+* API DOCS
+*****************/
