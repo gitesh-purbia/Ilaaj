@@ -9,6 +9,7 @@ Class Clinics extends Authenticated_Controller
 		{
 			parent::__construct();
 			$this->load->model('clinics_model', null, true);
+			$this->load->model('doctors_clinic_model', null, true);
 			$this->load->model('countries/countries_model', null, true);
 			$this->load->model('state/state_model', null, true);
 			$this->load->model('cities/cities_model', null, true);
@@ -41,8 +42,10 @@ Class Clinics extends Authenticated_Controller
 				}
 			}
 
-			$this->clinics_model->where('deleted',0);
-			$this->clinics_model->where('doctor_id',$this->current_user->id);
+			$this->db->select('clinics.*');
+			$this->clinics_model->where('clinics.deleted',0);
+			$this->db->join('doctors_clinic','clinics.id = doctors_clinic.clinic_id');
+			$this->clinics_model->where('doctors_clinic.doctor_id',$this->current_user->id);
 			$records = $this->clinics_model->find_all();
 			Template::set('records',$records);
 			Template::set('userid',$this->current_user->id);
@@ -125,7 +128,7 @@ Class Clinics extends Authenticated_Controller
 					$this->form_validation->set_rules($this->get_validation_rules('edit'));
 					if ($this->form_validation->run($this)) 
 					{
-						$_POST['doctor_id'] = $this->current_user->id;
+						 $_POST['doctor_id'] = $this->current_user->id;
 						 if($this->clinics_model->update($id, $_POST))
 						 {
 						 	Template::set_message('Rrecord updated.','success');
@@ -219,7 +222,7 @@ Class Clinics extends Authenticated_Controller
 						array(
 						'field' => 'clinic_name',
 						'label' => 'Clinic name',
-						'rules' => 'trim|required|unique[doctors_clinic.name]|max_length[100]|xss_clean',
+						'rules' => 'trim|required|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'address_line1',
@@ -269,7 +272,7 @@ Class Clinics extends Authenticated_Controller
 						array(
 						'field' => 'clinic_name',
 						'label' => 'Clinic name',
-						'rules' => 'trim|required|callback_checkname|max_length[100]|xss_clean',
+						'rules' => 'trim|required|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'address_line1',

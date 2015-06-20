@@ -139,17 +139,24 @@ Class Clinic_time_slots extends Authenticated_Controller
 				if($this->form_validation->run($this))
 				{
 					$success = false;
-					foreach ($days_array as $day) {
-						if($post_array['opening_time_'.$day]){
-							foreach ($post_array['opening_time_'.$day] as $key => $time) 
+					foreach ($days_array as $day) 
+					{
+						if($post_array['opening_time_'.$day])
+						{
+							foreach($post_array['opening_time_'.$day] as $key => $time) 
 							{
-								
-								if($this->clinic_time_slots_model->insert($id,$day,$time,$post_array['closing_time_'.$day][$key]))
+								if($time == null || $time == ''){
+									$opening_time = 'Off';} else {
+										$opening_time = $time;
+									}
+								if($post_array['closing_time_'.$day][$key] == null || $post_array['closing_time_'.$day][$key] ==''){
+									$closing_time = 'Off'; } else {
+										$closing_time = $post_array['closing_time_'.$day][$key];
+									}
+								if($this->clinic_time_slots_model->insert($id,$day,$opening_time,$closing_time))
 								{
 									$success = true;
 								}
-								//var_dump( 'Opening time - '.$day.' => '.$time);
-								//var_dump('Closing time - '.$day.' => '.$post_array['closing_time_'.$day][$key]);
 							}
 						}					
 					}
@@ -209,72 +216,72 @@ Class Clinic_time_slots extends Authenticated_Controller
 						array(
 						'field' => 'opening_time_monday[]',
 						'label' => 'Opening Time for Monday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_monday[]',
 						'label' => 'Closing Time for Monday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'opening_time_tuesday[]',
 						'label' => 'Opening Time for Tuesday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_tuesday[]',
 						'label' => 'Closing Time for Tuesday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'opening_time_wednesday[]',
 						'label' => 'Opening Time for Wednesday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_wednesday[]',
 						'label' => 'Closing Time for Wednesday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'opening_time_thursday[]',
 						'label' => 'Opening Time for Thursday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_thursday[]',
 						'label' => 'Closing Time for Thursday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'opening_time_friday[]',
 						'label' => 'Opening Time for Friday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_friday[]',
 						'label' => 'Closing Time for Friday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'opening_time_saturday[]',
 						'label' => 'Opening Time for Saturday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_saturday[]',
 						'label' => 'Closing Time for Saturday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'opening_time_sunday[]',
 						'label' => 'Opening Time for Sunday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 						array(
 						'field' => 'closing_time_sunday[]',
 						'label' => 'Closing Time for Sunday',
-						'rules' => 'trim|required|max_length[100]|xss_clean',
+						'rules' => 'trim|max_length[100]|xss_clean',
 						),
 					);
 					break;

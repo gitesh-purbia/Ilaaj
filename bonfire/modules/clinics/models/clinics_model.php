@@ -3,7 +3,7 @@
 Class Clinics_model extends BF_Model 
 {
 
-	protected $table = 'doctors_clinic';
+	protected $table = 'clinics';
 
 	protected $soft_deletes = TRUE;
 
@@ -18,7 +18,6 @@ Class Clinics_model extends BF_Model
 	public function insert($input = array())
 	{
 		$data = array(
-			'doctor_id'				=> $input['id'],
 			'name'	    			=> $input['clinic_name'],
 			'address_line1'	    	=> $input['address_line1'],
 			'country'		    	=> $input['country'],
@@ -33,6 +32,11 @@ Class Clinics_model extends BF_Model
 		
 		if ($clinic = parent::insert($data))
 		{
+			$data_n = array(
+				'doctor_id'		=> $input['doctor_id'],
+				'clinic_id'		=> $clinic,
+			);
+			$this->doctors_clinic_model->insert($data_n);
 			return $clinic;
 		}
 		else
@@ -46,7 +50,6 @@ Class Clinics_model extends BF_Model
 	public function update($id , $input = array())
 	{
 		$data = array(
-			'doctor_id'				=> $input['doctor_id'],
 			'name'	    			=> $input['clinic_name'],
 			'address_line1'	    	=> $input['address_line1'],
 			'country'		    	=> $input['country'],

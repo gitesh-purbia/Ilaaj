@@ -29,7 +29,7 @@ $id = isset($profile['id']) ? $profile['id'] : '';
 						<?php 
 							echo Template::message(); 
 						?>
-						<input type="hidden" name="id" value="<?php echo $userid; ?>">
+						<input type="hidden" name="doctor_id" value="<?php echo $userid; ?>">
 						
 						<h4>Detail Of Clinic</h4>
 						<div class="form-group">

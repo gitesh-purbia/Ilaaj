@@ -1,4 +1,5 @@
-<?php $currentRole = $this->auth->role_id(); ?>
+<?php 
+$currentRole = $this->auth->role_id(); ?>
 <body class="skin-blue">
 	<div class="wrapper">
 		<header class="main-header">
@@ -160,7 +161,15 @@
 								</li>
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="<?php if($currentRole == ADMINISTRATOR){ echo site_url('user_profile/update').'/'; }?>" class="btn btn-default btn-flat">Profile</a>
+										<?php
+											if($currentRole == ADMINISTRATOR){
+												 $url =  site_url('user_profile/update').'/'; 
+											}
+											else if($currentRole == DOCTORS){
+												 $url =  site_url('doctors_profile/profile').'/'; 
+											}
+										?>
+										<a href="<?php echo $url; ?>" class="btn btn-default btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
 										<a href="<?php echo site_url('logout'); ?>" class="btn btn-default btn-flat">Sign out</a>

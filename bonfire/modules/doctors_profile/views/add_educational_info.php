@@ -52,7 +52,7 @@ $id = isset($profile['id']) ? $profile['id'] : '';
 							<div class="form-group" id="clone_base">
 								<div class="clone row custom-form">
 									<div class="col-md-3">
-										<select id="degree" name="degree" class="degree" required="required">
+										<select id="degree" name="degree" class="degree form-control" required="required">
 											<option value="">--Select--</option>
 											<?php foreach($degrees as $degree): ?>
 											<option value="<?php echo $degree->name?>" <?php echo set_value('degree') == $degree->name ?'selected':''; ?> ><?php echo $degree->name;?></option>	

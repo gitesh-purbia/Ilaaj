@@ -17,16 +17,16 @@
 			</li>
 			
 			<li>
-				<?php echo anchor('/', '<i class="fa fa-book"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Home</span>'); ?>
+				<?php echo anchor('/', '<i class="fa fa-home"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Home</span>'); ?>
 			</li>
 			<?php if($currentRole == DOCTORS): ?>
 			<li>
-				<?php echo anchor('/clinics', '<i class="fa fa-circle-o"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Clinics</span>'); ?>
+				<?php echo anchor('/clinics', '<i class="fa fa-plus-square"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Clinics</span>'); ?>
 			</li>
 			<?php endif; ?>
 			<?php if($currentRole == ADMINISTRATOR): ?>
 			<li class="treeview">
-				<a href="#"> <i class="fa fa-files-o"></i> <span>Location</span></a>
+				<a href="#"> <i class="fa fa-map-marker"></i> <span>Location</span></a>
 				<ul class="treeview-menu">
 					<li>
 						<?php echo anchor('/countries', '<i class="fa fa-circle-o"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Countries</span>'); ?>
@@ -44,14 +44,14 @@
 			</li>
 
 			<li>
-				<?php echo anchor('/specialities', '<i class="fa fa-book"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Specialities</span>'); ?>
+				<?php echo anchor('/specialities', '<i class="fa fa-medkit"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Specialities</span>'); ?>
 			</li>
 			
 			<li>
-				<?php echo anchor('/degree', '<i class="fa fa-book"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Degree</span>'); ?>
+				<?php echo anchor('/degree', '<i class="fa fa-mortar-board"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Degree</span>'); ?>
 			</li>
 			<li>
-				<?php echo anchor('/doctors', '<i class="fa fa-book"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Doctors</span>'); ?>
+				<?php echo anchor('/doctors', '<i class="fa fa-user-md"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Doctors</span>'); ?>
 			</li>
 			<?php endif; ?>
 		</ul>

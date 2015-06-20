@@ -40,7 +40,6 @@ Class Doctors_profile extends Authenticated_Controller
 			{
 				if($_POST['deleted_image'])
 				{
-					var_dump($_POST['deleted_image']);
 					$path = $_SERVER['DOCUMENT_ROOT'].'/Ilaaj/uploads/doctors/';
 					unlink($path.$_POST['deleted_image']);
 					$data = array(
