@@ -11,6 +11,9 @@ Class Doctors_profile extends Authenticated_Controller
 		$this->load->model('degree/degree_model', null, true);
 		$this->load->model('specialities/specialities_model', null, true);
 		$this->load->model('doctors_specialities_model', null, true);
+		$this->load->model('countries/countries_model', null, true);
+		$this->load->model('state/state_model', null, true);
+		$this->load->model('cities/cities_model', null, true);
 		Assets::add_module_css('doctors_profile', 'page.css');
 	}
 	
@@ -111,6 +114,36 @@ Class Doctors_profile extends Authenticated_Controller
 				Template::set_view('add_personal_info');
 			}
 		}
+		
+		// Get Select Country, State and City for selected these on UI.
+				$country_array = array();
+				$state_array = array();
+				$city_array = array();
+				
+				$this->countries_model->where('deleted',0);
+				$countries = $this->countries_model->find_all();
+				foreach($countries as $country)
+				{
+					$country_array[$country->id] = $country;
+				}
+				Template::set('countries',$country_array);
+				
+				$this->state_model->where('deleted',0);
+				$states = $this->state_model->find_all();
+				foreach($states as $state)
+				{
+					$state_array[$state->id] = $state;
+				}
+				Template::set('states',$state_array);
+				
+				$this->cities_model->where('deleted',0);
+				$cities = $this->cities_model->find_all();
+				foreach($cities as $city)
+				{
+					$city_array[$city->id] = $city;
+				}
+				Template::set('cities',$city_array);
+				
 
 		Template::set('userid', $id);
 		Template::set_view('add_personal_info');
@@ -247,6 +280,21 @@ Class Doctors_profile extends Authenticated_Controller
 					'field' => 'dob',
 					'label' => 'Date of birth',
 					'rules' => 'trim|required|xss_clean'
+					),
+					array(
+					'field' => 'country',
+					'label' => 'Country',
+					'rules' => 'trim|required|max_length[10]|xss_clean'
+					),
+					array(
+					'field' => 'state',
+					'label' => 'State',
+					'rules' => 'trim|required|max_length[10]|xss_clean'
+					),
+					array(
+					'field' => 'city',
+					'label' => 'City',
+					'rules' => 'trim|required|max_length[10]|xss_clean'
 					),
 					array(
 					'field' => 'address_line1',

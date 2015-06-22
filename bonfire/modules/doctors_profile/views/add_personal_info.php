@@ -138,7 +138,43 @@ $id = isset($profile['id']) ? $profile['id'] : '';
 										<span class='text-red'><?php echo form_error('dob'); ?></span>
 									</div>
 								</div>
+							</div><div class="form-group">
+							<div class="row custom-form">
+								<div class="col-md-2">
+									<label for="country">Country*</label>
+								</div>
+								<div class="col-md-4">
+									<input type="hidden" style="width: 100%" name="country" id="country" value="<?php echo set_value('country', isset($records[0]->country) ? $records[0]->country : ''); ?>">
+									<span class='text-red'><?php echo form_error('country'); ?></span>
+								</div>
 							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="row custom-form">
+								<div class="col-md-2">
+									<label for="state">State*</label>
+								</div>
+								<div class="col-md-4">
+									<input type="hidden" style="width: 100%" name="state" id="state" value="<?php echo set_value('state'); ?>">	
+									<span class='text-red'><?php echo form_error('state'); ?></span>
+								</div>
+							</div>
+						</div>
+							
+						<div class="form-group">
+							<div class="row custom-form">
+								<div class="col-md-2">
+									<label for="city">City*</label>
+								</div>
+								<div class="col-md-4">	
+									<input type="hidden" style="width: 100%" name="city" id="city" value="<?php echo set_value('city'); ?>">
+									<span class='text-red'><?php echo form_error('city'); ?></span>
+								</div>
+							</div>
+						</div>
+							
+							
 							
 							<div class="form-group">	
 								<div class="row custom-form">
@@ -326,6 +362,115 @@ $id = isset($profile['id']) ? $profile['id'] : '';
 
 		$('#example').data( "photobooth" ).resize( 200, 200 );
 		<?php endif; ?>
+		
+		//----------------------------jquery-----------------------------------------------------------
+		
+		jQuery('#country').select2({
+			placeholder : 'Select Country',
+			minimumInputLength: 1,
+		    ajax: {
+		        url: '<?php echo site_url('countries/get_countries')?>',
+		        dataType: 'json',
+		        type : 'GET',
+		       	data: function(term) {
+					return {
+						countries : term
+					};
+				},
+		        results: function (data) 
+		        {
+		            var myResults = [];
+		            $("#state").select2("val", "");
+		            $("#city").select2("val", "");
+		            jQuery.each(data, function(index,item) {
+		                myResults.push({
+		                    id: item.id,
+		                    text: item.name
+		                });
+		            });
+		            return {
+		                results: myResults
+		            };
+		        },
+		    }
+		});
+		<?php $country = set_value('country', isset($records[0]->country) ? $records[0]->country : '');?>	
+		<?php if(isset($country) && $country!='' ) { ?>
+			jQuery('#country').select2('data', {id: '<?php echo $country;?>', text:'<?php echo $countries[$country]->name;?>'}); 
+		<?php } ?>	
+		
+		
+		jQuery('#state').select2({
+			placeholder : 'Select State',
+			minimumInputLength: 1,
+		    ajax: {
+		        url: '<?php echo site_url('state/get_states')?>',
+		        dataType: 'json',
+		        type : 'GET',
+		       	data: function(term) {
+					return {
+							country : function (){
+								return jQuery('#country').val();
+							},
+							state : term
+						};
+				},
+		        results: function (data) 
+		        {
+		            var myResults = [];
+		            $("#city").select2("val", "");
+		            jQuery.each(data, function(index,item) {
+		                myResults.push({
+		                    id: item.id,
+		                    text: item.name
+		                });
+		            });
+		            return {
+		                results: myResults
+		            };
+		        }
+		    }
+		});
+		<?php $state = set_value('state',isset($records[0]->state) ? $records[0]->state : ''); ?>	
+		<?php if(isset($state) && $state!=''):?>
+			jQuery('#state').select2('data', {id: '<?php echo $state;?>', text: '<?php echo $states[$state]->name;?>'});  
+		<?php endif;?>
+		
+		
+		jQuery('#city').select2({
+			placeholder : 'Select City',
+			minimumInputLength: 1,
+		    ajax: {
+		        url: '<?php echo site_url('cities/get_cities')?>',
+		        dataType: 'json',
+		        type : 'GET',
+		       	data: function(term) {
+					return {
+							state : function (){
+								return jQuery('#state').val();
+							},
+							city : term
+						};
+				},
+		        results: function (data) 
+		        {
+		            var myResults = [];
+		            jQuery.each(data, function(index,item) {
+		                myResults.push({
+		                    id: item.id,
+		                    text: item.name
+		                });
+		            });
+		            return {
+		                results: myResults
+		            };
+		        }
+		    }
+		});
+		<?php $city = set_value('city', isset($records[0]->city) ? $records[0]->city : ''); ?>	
+		<?php if(isset($city) & $city !=''):?>
+			jQuery('#city').select2('data', {id: '<?php echo $city;?>', text: '<?php echo $cities[$city]->name;?>'});
+		<?php endif;?>
 		
 	}
 </script>
