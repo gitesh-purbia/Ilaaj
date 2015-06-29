@@ -147,7 +147,7 @@ $currentRole = $this->auth->role_id(); ?>
 							</ul>
 						</li>
 						<li class="dropdown user user-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="<?php echo Template::theme_url('images/user2-160x160.jpg') ?>" class="user-image" alt="User Image"/> 
 								<span class="hidden-xs"><?php echo $current_user->display_name;?></span> 
 							</a>
@@ -167,6 +167,9 @@ $currentRole = $this->auth->role_id(); ?>
 											}
 											else if($currentRole == DOCTORS){
 												 $url =  site_url('doctors_profile/profile').'/'; 
+											}
+											else if($currentRole == PATIENTS){
+												 $url =  site_url('patients/update_personal_info').'/'; 
 											}
 										?>
 										<a href="<?php echo $url; ?>" class="btn btn-default btn-flat">Profile</a>

@@ -8,6 +8,7 @@ class Home extends Authenticated_Controller
 		$this->load->model('users/user_model');
 		$this->load->model('doctors_profile/doctors_profile_model');
 		$this->load->model('users/user_model');
+		$this->load->model('home_model');
 	}
 	
 	//--------------------------------------------------------------------
@@ -35,16 +36,20 @@ class Home extends Authenticated_Controller
 			$this->db->select('modified_on'); 
 		    $this->db->from('patients');   
 		    $this->db->where('user_id', $id);
-		    $doctor = $this->db->get()->result();
-			if($doctor == null)
+		    $patient = $this->db->get()->result();
+			if($patient == null)
 			{
 				redirect('profile/patients_profile/'.$id);
 			}
+			$appointment_shedule = $this->home_model->get_patients_appointment($id);
+			Template::set('appointment_shedule',$appointment_shedule);
+			
 		}
 		
 		Template::render();
 	}
 
 	//--------------------------------------------------------------------
+	
 
 }

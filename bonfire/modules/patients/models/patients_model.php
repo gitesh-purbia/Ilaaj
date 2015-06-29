@@ -20,7 +20,6 @@ Class patients_model extends BF_Model
 	
 	public function update($id,$input = array())
 	{
-		
 		if ($patients = parent::update($id,$input))
 		{
 			return $patients;

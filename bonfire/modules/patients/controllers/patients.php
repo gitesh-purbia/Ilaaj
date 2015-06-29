@@ -54,8 +54,11 @@ Class patients extends Authenticated_Controller
 		
 	//=======================================================================================
 	
-		public function update_personal_info($id=false)
+		public function update_personal_info()
 		{
+			$user_id=$this->current_user->id;
+			$record=$this->patients_model->find_by('user_id',$user_id);
+			$id=$record->id;
 			if($id)
 			{
 				$shows=$this->patients_model->find($id);
@@ -75,21 +78,24 @@ Class patients extends Authenticated_Controller
 											'address_line1'	    	=> $this -> input ->post('address_line1'),
 											'address_line2'	    	=> $this -> input ->post('address_line2'),
 											'landline'	    		=> $this -> input ->post('landline'),
-											'photo'	    			=> $this -> input -> post('current_image'),
+											'photo'	    			=> $this -> input ->post('current_image'),
 											'deleted' 				=> 0,
 													);
 								}
 
 								else
 								{
-										$path = FCPATH . 'bonfire\modules\patients\patients_images\\';
+										$path = $_SERVER['DOCUMENT_ROOT'].'/Ilaaj/uploads/patients/';
 										$ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
 									    $rand = 'Patients_'.time();
 									    $file = $rand.".".$ext;
 									    $temp_name = $_FILES['photo']['tmp_name'];
 										move_uploaded_file($temp_name,$path.$file);
 								        $image = $this -> patients_model -> find($id);
-										unlink($path . '\\' . $image -> photo);
+										if(isset($image -> photo))
+										{
+											unlink($path . '\\' . $image -> photo);
+										}
 										
 									
 										$data = array(
@@ -110,7 +116,6 @@ Class patients extends Authenticated_Controller
 							$this->form_validation->set_rules($this->get_validation_rules('edit'));
 							if ($this->form_validation->run($this))
 							{
-															
 								if ($id = $this->patients_model->update($id,$data))
 								{
 									Template::set_message('Record Successfully updated', 'success');
@@ -135,7 +140,7 @@ Class patients extends Authenticated_Controller
 			}	
 			else
 				{
-					redirect('patient/edit');
+					redirect('patients/update_personal_info');
 					
 				}
 			

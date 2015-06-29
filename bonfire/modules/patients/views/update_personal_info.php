@@ -28,15 +28,11 @@ $id = isset($show['id']) ? $show['id'] : '';
 					<div class="box-body">
 							<?php
 								$attributes = array( 'id' => 'patients_form','name' => 'patients_form', 'autocomplete'=> 'off');
-								echo form_open_multipart('patients/edit/'.$show->id, $attributes);
+								echo form_open_multipart('patients/update_personal_info/'.$show->id, $attributes);
 							?>
 							<?php 
 								echo Template::message(); 
 							?>
-							
-							
-							
-							
 						    <div class="form-group">
 								<div class="row custom-form">
 									<div class="col-md-3">
@@ -49,8 +45,6 @@ $id = isset($show['id']) ? $show['id'] : '';
 										<br>
 									</div>
 								</div>  
-							
-							
 							<div class="form-group">	
 								<div class="row custom-form">
 									<div class="col-md-3">
@@ -183,7 +177,7 @@ $id = isset($show['id']) ? $show['id'] : '';
 										<label for="website">Photo</label>
 									</div>
 									<div class="col-md-4">
-										<input name="photo" id="" type="file" class="form-control"  />
+										<input name="photo" id="photo" type="file" class="form-control"  />
 										<input type="hidden" name="current_image" value="<?php echo $show->photo; ?>" />
 										<span class='text-red'><?php echo form_error('photo'); ?></span>
 									</div>
